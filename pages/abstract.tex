@@ -1,0 +1,27 @@
+\chapter{\abstractname}
+
+%TODO: Abstract
+Here goes abstract
+
+
+
+
+\makeatletter
+\ifthenelse{\pdf@strcmp{\languagename}{english}=0}
+{\renewcommand{\abstractname}{Kurzfassung}}
+{\renewcommand{\abstractname}{Abstract}}
+\makeatother
+
+\chapter{\abstractname}
+
+\begin{otherlanguage}{ngerman}
+    Hier geht die Kurzfassung
+
+\end{otherlanguage}
+
+
+\makeatletter
+\ifthenelse{\pdf@strcmp{\languagename}{english}=0}
+{\renewcommand{\abstractname}{Abstract}}
+{\renewcommand{\abstractname}{Kurzfassung}}
+\makeatother

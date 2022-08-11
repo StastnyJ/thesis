@@ -1,0 +1,19 @@
+{
+  "grammarly.selectors": [
+    {
+      "language": "latex",
+      "scheme": "file",
+      "pattern": "chapters/03_TechnicalBackground.tex"
+    },
+    {
+      "language": "latex",
+      "scheme": "file",
+      "pattern": "chapters/04_Methodology.tex"
+    },
+    {
+      "language": "latex",
+      "scheme": "file",
+      "pattern": "chapters/01_Introduction.tex"
+    }
+  ]
+}
