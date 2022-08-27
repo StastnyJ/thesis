@@ -1,19 +1,39 @@
 {
   "grammarly.selectors": [
     {
-      "language": "latex",
-      "scheme": "file",
-      "pattern": "chapters/03_TechnicalBackground.tex"
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/03_TechnicalBackground.tex"
     },
     {
-      "language": "latex",
-      "scheme": "file",
-      "pattern": "chapters/04_Methodology.tex"
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/04_Methodology.tex"
     },
     {
-      "language": "latex",
-      "scheme": "file",
-      "pattern": "chapters/01_Introduction.tex"
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/01_Introduction.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/04_Methodology/4.5_HierachicalViewMatching.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/04_Methodology/4.6_NNViewMatching.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/04_Methodology/4.2_SystemArchitecture.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/04_Methodology/4.7_2StageViewMatching.tex"
     }
-  ]
+]
 }
