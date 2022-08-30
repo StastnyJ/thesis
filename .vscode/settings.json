@@ -34,6 +34,16 @@
         "language": "latex",
         "scheme": "file",
         "pattern": "chapters/04_Methodology/4.7_2StageViewMatching.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/04_Methodology/4.1_ProblemDefinition.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/02_RelatedWork.tex"
     }
 ]
 }

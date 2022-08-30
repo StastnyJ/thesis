@@ -43,11 +43,7 @@ Particularly researchers with this tool record all data from the sensors while r
 
 \subsection*{Catkin}
 
-Catkin is a collection of CMake macros and Python scripts, commonly used for the ROS development and building of ROS Nodes and packages. Even if catkin is not the official part of ROS, it is a widely used tool among the ROS community.
-
-\section{3D Lidar Sensors, Point clouds and Colored Point clouds}
-
-TODO ?
+Catkin is a collection of CMake macros and Python scripts commonly used for the ROS development and building of ROS Nodes and packages. Even if catkin is not the official part of ROS, it is a widely used tool among the ROS community.
 
 \section{Gazebo}
 
@@ -75,8 +71,17 @@ Pytorch is a python open-source machine learning framework based on the Torch li
 
 \section{PointNet}
 
-TODO
+PointNet [TODO ref] is a deep neural network widely used for point cloud processing by many applications. This network can extract the feature vector from any point cloud, invariant to the order of the points and the rotation of the scene that the input cloud represents. Furthermore, the input size in terms of the number of points can vary for each input. There is available a C++ implementation [TODO ref] of the network, as well as a Python implementation in TensorFlow [TODO ref] or PyTorch [TODO ref] version.\par
+Except for the feature extraction, the implementations of the PointNet network also include additional networks for scene segmentation and object classification based on the extracted feature vector from the PointNet network. Furthermore, all required learning and dataset preparation algorithms are also included.
 
 \section{Color Models}
 
-TODO
+There are many different ways to represent a single color on a computer. Except for the well-known RGB representation, there are many different other representations with distinct advantages. Lab [TODO refs] representation is for the work the most interesting because it allows easy color difference computation, using CIE76 [TODO ref] and CIE2000 [TODO ref] that correspond in the best way to the difference told by humans.\par
+Similarly, as in an RGB format, the colors are represented using three different components, L, a, and b. The L part stands for lightness and means how light or dark the color is. The a and b components represent the balance between two different colors. The a part describes the balance between green and magenta, and the b part represents the balance between blue and yellow. Even if this color scheme can describe the whole space of colors, the colors visible by human eyes are located in a sphere, displayed in Figure \ref{fig:labscheme}.
+
+%https://www.researchgate.net/figure/CIELab-1976-after-Figure-1-from-SantAnna-et-al-2013-602_fig4_311426707
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Lab.png}
+    \caption{Visualization of an Lab color representation [TODO ref]} \label{fig:labscheme}
+\end{figure}

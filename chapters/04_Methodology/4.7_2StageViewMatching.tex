@@ -4,8 +4,11 @@ This approach tries to combine both previously presented methods to achieve bett
 
 \subsection{Template building}
 
-
+The scene representation in this method combines the scene representations from both previously presented techniques. The scene is represented as a set of objects description, as described in chapter [TODO chapter ref], and simultaneously, the feature extraction described in the chapter [TODO chapter ref] is performed. The Final representation is a tuple of the object decomposition and features vector.
 
 \subsection{Template matching}
 
+As the name of the approach suggests, the matching is performed in two stages. In the first stage, the similarity of the two scenes is calculated the same as in the chapter [TODO chapter ref]. After the similarity is computed, it is compared with a given threshold so that it is predecided, if it is positive or negative. The calculated similarity is returned as a final result if it is negative. If it is positive, the second stage is performed in order to reduce the number of false positives.\par
+In the second stage, the feature vectors are compared in the same way as in a section [TODO section ref]. If the result is higher than another threshold, the result of the first stage is returned. If the result is lower than the threshold, 0 is returned. The whole process is summarized in Figure [TODO ref].
 
+TODO diagram image

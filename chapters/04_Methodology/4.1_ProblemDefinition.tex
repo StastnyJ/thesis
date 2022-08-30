@@ -1,3 +1,18 @@
 \section{Problem definition}
 
-TODO Problem definition
+\begin{enumerate}
+    \item The place recognition algorithm receives the data from the unsynchronized sensors, namely the 3D-point cloud from the LiDAR and RGB image from an HD camera. The goal is to recognize if the robot is in the current scene for the first time or if the scene has already been visited. Furthermore, if the scene was already visited, the algorithm must precisely tell which previously visited scene corresponds to the current one. The following steps must be solved:
+          \begin{itemize}
+              \item Data synchronization
+              \item Data fusion
+              \item Place recognition
+                    \\
+              \item \textbf{Input:} 3D Point cloud and RGB image
+              \item \textbf{Output:} Id of a corresponding previously visited scene or a new id for the scenes visited for the first time
+          \end{itemize}
+    \item The place recognition algorithm is integrated with the RatSLAMRos system to solve the SLAM problem.
+          \begin{itemize}
+              \item \textbf{Input:} 3D Point cloud, RGB image, odometry
+              \item \textbf{Output:} estimated robot path
+          \end{itemize}
+\end{enumerate}
