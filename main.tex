@@ -1,19 +1,17 @@
 \RequirePackage[l2tabu,orthodox]{nag}
 
-% TODO: decide if one-sided/two-sided
-%\documentclass[headsepline,footsepline,footinclude=false,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,BCOR=12mm,DIV=12]{scrbook} % two-sided % original source stated: BCOR=12mm,DIV=12
+% \documentclass[headsepline,footsepline,footinclude=false,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,BCOR=12mm,DIV=12]{scrbook} % two-sided % original source stated: BCOR=12mm,DIV=12
 \documentclass[headsepline,footsepline,footinclude=false,oneside,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,DIV=12]{scrbook} % one-sided
 
 % TODO: change citation style in settings
 \input{settings}
 
-% TODO: change thesis information
 \newcommand*{\getUniversity}{Technische Universität München}
 \newcommand*{\getFaculty}{Department of Informatics}
-\newcommand*{\getTitle}{LiDAR and camera data fusion for the biologically inspired SLAM systems} % TODO English title
-\newcommand*{\getTitleGer}{LiDAR und Kameradaten Fusion für die biologisch inspirierten SLAM-Systeme} % TODO german title
+\newcommand*{\getTitle}{LiDAR and camera data fusion for the biologically inspired SLAM systems}
+\newcommand*{\getTitleGer}{LiDAR und Kameradaten Fusion für die biologisch inspirierten SLAM-Systeme}
 \newcommand*{\getAuthor}{Jakub Šťastný} 
-\newcommand*{\getDoctype}{Bachelor's Thesis in Informatics} % TODO check thesis type
+\newcommand*{\getDoctype}{Bachelor's Thesis in Informatics}
 \newcommand*{\getSupervisor}{Prof. Dr.-Ing. habil. Alois C. Knoll}
 \newcommand*{\getAdvisor}{Genghang Zhuang, M.Eng.}
 \newcommand*{\getSubmissionDate}{15.09.2022} % TODO check date format
@@ -43,7 +41,6 @@
 \input{chapters/04_Methodology}
 \input{chapters/05_Experiments}
 \input{chapters/06_Conclusion}
-\input{chapters/999_template}
 
 \appendix{}
 \input{pages/appendix}

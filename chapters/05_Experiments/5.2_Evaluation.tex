@@ -1,0 +1,28 @@
+\section{Evaluation}\label{section:Evaluation}
+
+The result of a place recognition for a single scene can be either positive or negative. The positive evaluation means that the scene matched one of the previous ones, and the negative means that this scene is entirely new. However, in contrast to many classification algorithms, the result strongly depends on the earlier results, and the evaluation order of scenes matters. Furthermore, the classification algorithms generate the ids of the scenes instead of the direct positive/negative evaluation.\par
+Let $n$ be number of scenes in the simulation and $S = \left(s_1, s_2, \dots, s_n\right)$ an ordered set of scenes that are gradually passed as an input to the algorithm. Let $P = \left(p_1, p_2, \dots, p_n\right)$ be an ordered set of the exact robot locations\footnote{$x$ and $y$ coordinates} and $O = \left(o_1, o_2, \dots, o_n\right)$ be an ordered set of exact robot orientations, on which the robot was in a time, when the appropriate scene was taken. Finally, let $R = \left(r_1, r_2, \dots, r_n \right)$ be an ordered set of scene ids, generated as an output of the place recognition algorithm.\par
+Now, the result $r_i$ will be considered positive if
+$$
+    \exists j < i : r_j = r_i
+$$, and negative if
+$$
+    \forall j < i : r_j \neq r_i
+$$. The positive result is considered a false positive if the first scene with the same id is too far from the current scene in terms of location and orientation. The negative result is considered false negative if a previously saved scene is very close to the current scene in terms of location and orientation.\par
+Formally, let
+$$
+    first\_ind(x) = \begin{cases}
+        i\text{ st. } r_i = x \land \forall j < i: r_j \neq x & \text{ if $x \in R$} \\
+        0                                                     & \text{ otherwise}    \\
+    \end{cases}
+$$
+be a function that returns the index of the first scene evaluated with an id $x$. Let $r_i$ be a positive result. $r_i$ is a false positive if and only if
+$$
+    \| p_{first\_ind(r_i)} - p_i \| > th_\text{pos1} \lor | o_{first\_ind(r_i)} - o_i | > th_{\text{ori1}}.
+$$\par
+Now let $r_i$ be a negative result. $r_i$ is a false negative if and only if
+$$
+    \exists x < r_i:  \| p_{first\_ind(x)} - p_i \| \le th_\text{pos2} \land | o_{first\_ind(x)} - o_i | \le th_{\text{ori2}}.
+$$\par
+The thresholds depend on the resolution of the cell network used in the RatSLAM algorithm. Based on the robot's dimensions, the place cell size was chosen as 20 cm, slightly smaller than the robot. If the positively evaluated location is close enough, e.g., in the neighboring cells as the matched location, the algorithm still works well. Because of this, the false positive position threshold $th_\text{pos1}$ was chosen as 80 cm, which is more then four cells away. Similary, the size of orientation cells is 12°, and the false positive threshold $th_\text{pos2}$ was chosen as ca 22.9183°.\par
+The false negative thresholds were chosen the same as the cell sizes, so 20 cm and 12°.

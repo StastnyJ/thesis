@@ -1,4 +1,4 @@
-\section{System architecture}
+\section{System architecture}\label{section:systemArchitecture}
 
 This section presents an overview of the architecture of the whole system. The system is decomposed into several Nodes. Together with the  RatSLAMRos and simulator, the system uses three custom nodes: Data fusion, LV Builder, and LV matching. Furthermore, the system contains two additional nodes that do not influence the algorithm's run but are used for the performance analyses and other help utilities, helping with the development process. The system architecture is presented in Figure \ref{fig:systemArchitecture}. The visualization and topics used only for visualization purposes are omitted for clarity.
 
@@ -124,7 +124,7 @@ This node subscribes to the same topics as the Rat SLAM Ros package. This node s
     \end{tabular}
 \end{table}
 
-\subsection{LV Dataset creator}
+\subsection{LV Dataset creator}\label{section:lvdatasetCreator}
 
 This node works in principle similar to the LV Analyzer node. The goal of this node is to pair the templates with their exact positions received from the simulator. Unlike the LV Analyzer node, this node receives and pairs the whole template from the LV Builder node instead of only the scene id from the LV Matching node. The set of pairs of templates and their exact positions is the output of this node, which helps build final datasets for automatic parameter tuning, see chapter [TODO chapter ref], or neural networks training, see chapter [TODO chapter ref].
 

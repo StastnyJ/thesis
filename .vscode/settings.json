@@ -44,6 +44,51 @@
         "language": "latex",
         "scheme": "file",
         "pattern": "chapters/02_RelatedWork.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.1_UsedEnvironments.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.2_Evaluation.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.3_SystemSetup.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.4_Accuracy.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.5_AverageError.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.6_TimePerformace.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.7_MemoryConsumption.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.8_RatSalmIntegration.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments.tex"
     }
 ]
 }

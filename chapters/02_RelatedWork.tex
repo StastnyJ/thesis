@@ -1,35 +1,35 @@
 \chapter{Related Work}\label{chapter:relatedWork}
 
-\section{Scene recognition problem}
+\section{Scene recognition problem}\label{section:sceneRecognitionProblem}
 
 Scene recognition is a problem that received a lot of attention from many researchers and engineers in the last few years. Even if approaches for several sensors were developed, the most popular is visual scene recognition based on images from a camera.\par
 This section presents some of the most popular approaches for visual scene recognition based on traditional methods and machine learning.
 
-\subsection{Local image descriptors}
+\subsection{Local image descriptors}\label{section:localImageDescriptors}
 
-This technique aims to find, describe and compare significant features from the images. Each image is processed in two phases: detection and description. Since both stages can be solved independetelly, a large number of various approaches for each phase have been developed.\par
-The detection phase aims to detect all essential features in a given image, such as edges, corners, significant points, or objects. The feature detection algorithms generate pixel coordinates of each feature, usually with an occupied area. There are many different approaches to this problem, like FAST [TODO ref], Laplacian of Gaussian [TODO ref], SUSAN [TODO ref], and many more, detecting different kinds of features.\par
+This technique aims to find, describe and compare significant features from the images. Each image is processed in two phases: detection and description. Since both stages can be solved independently, a large number of various approaches for each phase have been developed.\par
+The detection phase aims to detect all essential features in a given image, such as edges, corners, significant points, or objects. The feature detection algorithms generate pixel coordinates of each feature, usually with an occupied area. There are many different approaches to this problem, like FAST \parencite{FAST}, Laplacian of Gaussian \parencite{LaplacianOfGaussian}, SUSAN \parencite{SUSAN}, and many more, detecting different kinds of features.\par
 
 TODO image of feature detection example
 
-The goal of the description phase is to provide a summary of the image information around each feature. The feature is represented as its position in the image, and the output is defined as an N-dimensional vector. A good feature descriptor should fulfill three following rules: Repeatability, Distinctiveness, and Efficiency. The repeatability means that the feature descriptor is robust and invariant to the image's translation, rotation, or illumination changes. Distinctiveness represents the ability to distinguish between two close features. Finally, due to real-time processing, which is increasingly applied nowadays, efficiency also plays an important role. Among popular approaches to solve this problem can be included SURF [TODO ref], GLOH [TODO ref], BRIEF [TODO ref], and many more.\par
+The goal of the description phase is to provide a summary of the image information around each feature. The feature is represented as its position in the image, and the output is defined as an N-dimensional vector. A good feature descriptor should fulfill three following rules: Repeatability, Distinctiveness, and Efficiency. The repeatability means that the feature descriptor is robust and invariant to the image's translation, rotation, or illumination changes. Distinctiveness represents the ability to distinguish between two close features. Finally, due to real-time processing, which is increasingly applied nowadays, efficiency also plays an important role. Among popular approaches to solve this problem can be included SURF \parencite{SURF}, GLOH \parencite{GLOH}, BRIEF \parencite{BRIEF}, and many more.\par
 Using these two stages, the set of local image descriptors
 $$
     \mathbf{X} = [\mathbf{x}_0, \mathbf{x}_1, \dots, \mathbf{x}_{n-1}]^T
 $$
-is extracted, in which $\textbf{x}_i \in \mathbb{R}^k$. However, each image can contain hundreds of individual features, which can be impractical in real-time processing and requires a huge amount of memory. To lower the dimensions of the local descriptors vector, different techniques like bag-of-visual-words [TODO ref], VLAD [TODO ref], or Fisher kernel [TODO ref] may be applied to aggregate the vector $\mathbb{X}$ into a more compact single vector. Finally, these vectors are compared to decide if two images represent the same place. The precise comparison technique depends on the techniques used in the description phase and for the final descriptors' vector compression.
+is extracted, in which $\textbf{x}_i \in \mathbb{R}^k$. However, each image can contain hundreds of individual features, which can be impractical in real-time processing and requires a huge amount of memory. To lower the dimensions of the local descriptors vector, different techniques like bag-of-visual-words \parencite{BagOfVisualWords1}\parencite{BagOfVisualWords2}, VLAD \parencite{VLAD}, or Fisher kernel \parencite{FisherKernel} may be applied to aggregate the vector $\mathbb{X}$ into a more compact single vector. Finally, these vectors are compared to decide if two images represent the same place. The precise comparison technique depends on the techniques used in the description phase and for the final descriptors' vector compression.
 
-\subsection{Global image descriptors}
+\subsection{Global image descriptors}\label{section:globalImageDescriptors}
 
-This technique works similarly to the previous one, with one big difference. In this approach, the detection phase is wholly omitted, and the whole image is considered as only one feature. Therefore, the feature description algorithms must be modified to suitably describe large and diverse features. Some alternations of the algorithms provided in the last part might be WI\_SURF [TODO ref] or BRIEF-GIST [TODO ref].
+This technique works similarly to the previous one, with one big difference. In this approach, the detection phase is wholly omitted, and the whole image is considered as only one feature. Therefore, the feature description algorithms must be modified to suitably describe large and diverse features. Some alternations of the algorithms provided in the last part might be WI\_SURF \parencite{WiSurf} or BRIEF-GIST \parencite{BRIEFGIST}.
 
-\subsection{Neural networks based approaches}
+\subsection{Neural networks based approaches}\label{section:neuralNetworksBasedApproaches}
 
-Convolutional neural networks achieve outstanding performance on several recognition or classification tasks, including a solution to scene recognition problems [TODO refs]. The basic idea behind this approach is similar to the presently presented technique. In the first step, the global feature descriptor is extracted from the image and afterward compared with the other extracted feature vectors. However, unlike the previously presented technique, this approach uses machine learning instead of classical techniques to perform these two tasks.\par
-According to the studies [TODO refs], the features extracted from images using convolutional neural networks significantly outperform the features extracted by classical algorithms like SIFT. There are many different kinds of convolutional neural networks used for these purposes. From the most popular ones, we can mention VGGNet [TODO ref] or GoogleNet [TODO ref].
+Convolutional neural networks achieve outstanding performance on several recognition or classification tasks, including a solution to scene recognition problems \parencite{CNNSceneRecognition1} \parencite{CNNSceneRecognition2}. The basic idea behind this approach is similar to the presently presented technique. In the first step, the global feature descriptor is extracted from the image and afterward compared with the other extracted feature vectors. However, unlike the previously presented technique, this approach uses machine learning instead of classical techniques to perform these two tasks.\par
+According to the studies [TODO refs], the features extracted from images using convolutional neural networks significantly outperform the features extracted by classical algorithms like SIFT. There are many different kinds of convolutional neural networks used for these purposes. From the most popular ones, we can mention VGGNet \parencite{VggNet} or GoogleNet \parencite{GoogleNet}.
 
-\section{Biologically inspired SLAM systems}
+\section{Biologically inspired SLAM systems}\label{section:bioSlam}
 
-\subsection{RatSLAM}
+\subsection{RatSLAM}\label{section:ratSlamRW}
 
-\subsection{Other RatSLAM variants}
+\subsection{Other RatSLAM variants}\label{section:ratSlamVariants}
