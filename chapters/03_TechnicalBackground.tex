@@ -4,10 +4,9 @@ This chapter provides an overview of most of the techniques, frameworks, and lib
 
 \section{Robot Operating System}\label{section:ROS}
 
-%(TODO citation) 
-Robot Operating System, shortly ROS is a popular open-source framework commonly used by many researchers and robot developers. This framework allows easy launch, deployment, and communication between different modules as standalone services that create a final complex system. This modularity permitted the creation and easy application of various tools and libraries like Gazebo, RViz, or rqt (TODO references), together with custom services. Furthermore, the ROS allows an easy spread of one system among more devices, allowing an easy run of some services directly on the robot and other services on the central computer, without almost any accessive work.\par
+Robot Operating System\cite{ros}, shortly ROS is a popular open-source framework commonly used by many researchers and robot developers. This framework allows easy launch, deployment, and communication between different modules as standalone services that create a final complex system. This modularity permitted the creation and easy application of various tools and libraries like Gazebo, RViz, or rqt, together with custom services. Furthermore, the ROS allows an easy spread of one system among more devices, allowing an easy run of some services directly on the robot and other services on the central computer, without almost any accessive work.\par
 Another significant advantage of the ROS's modularity is that you can exchange the robot simulator with the real robot and sensors without touching the rest of the system. Furthermore, you can record and replay the entire system's messages during its run, allowing easy reproducibility of any experiment.\par
-The official languages of the ROS are C++ and Python, but there are also inofficial tools that allow writing services for ROS in other languages, like, for example, LISP or Swift. (TODO references)\par
+The official languages of the ROS are C++ and Python, but there are also inofficial tools that allow writing services for ROS in other languages, like, for example, LISP \cite{RosLISP} or Swift\cite{RosSwift}.\par
 The following subsections briefly introduce some of the essential ROS features.
 
 \subsection*{Roscore}
@@ -47,7 +46,6 @@ Catkin is a collection of CMake macros and Python scripts commonly used for the 
 
 \section{Gazebo}\label{section:gazebo}
 
-%(TODO ref)
 Gazebo is a famous open-source 3D-simulation tool supporting robot simulation in complex 3D environments, including realistic physics, like gravity, friction, collisions, light reflections, etc. These environments can also change over time, which allows adding pedestrians, moving cars, or other non-stationary objects to the simulation.\par
 Furthermore, Gazebo supports various types of sensors, especially HD-Camera, 3D or 2D Lidar, IMU, etc., or several plugins for the robot control. This tool also provides an interface fully compatible with ROS, which makes it a perfect simulation tool for this thesis.
 
@@ -61,22 +59,20 @@ RViz is a ROS graphical interface, allowing the visualization of the information
 
 \section{OpenCV}\label{section:openCv}
 
-%(TODO ref)
-OpenCV is an open-source computer vision library available for C++ and Python. This library contains many real-time image and video processing tools, from simple transformations to feature extraction and matching or object recognition.
+OpenCV\cite{OpenCV} is an open-source computer vision library available for C++ and Python. This library contains many real-time image and video processing tools, from simple transformations to feature extraction and matching or object recognition.
 
 \section{Pytorch}\label{section:pytorch}
 
-%(TODO ref)
-Pytorch is a python open-source machine learning framework based on the Torch library. This framework is commonly used in the area of machine learning. It contains many tools for modeling Neural Networks, several training algorithms, tools for datasets preparation, advanced matrix operations tools, etc. Furthermore, because of the CUDA support, this framework allows running most of the calculations on the GPU, which can significantly speed up the training process of most models.
+Pytorch \cite{PyTorch} is a python open-source machine learning framework based on the Torch library. This framework is commonly used in the area of machine learning. It contains many tools for modeling Neural Networks, several training algorithms, tools for datasets preparation, advanced matrix operations tools, etc. Furthermore, because of the CUDA support, this framework allows running most of the calculations on the GPU, which can significantly speed up the training process of most models.
 
 \section{PointNet}\label{section:pointNet}
 
-PointNet [TODO ref] is a deep neural network widely used for point cloud processing by many applications. This network can extract the feature vector from any point cloud, invariant to the order of the points and the rotation of the scene that the input cloud represents. Furthermore, the input size in terms of the number of points can vary for each input. There is available a C++ implementation [TODO ref] of the network, as well as a Python implementation in TensorFlow [TODO ref] or PyTorch [TODO ref] version.\par
+PointNet \cite{PointNet} is a deep neural network widely used for point cloud processing by many applications. This network can extract the feature vector from any point cloud, invariant to the order of the points and the rotation of the scene that the input cloud represents. Furthermore, the input size in terms of the number of points can vary for each input. There is available a C++ implementation \cite{PNCpp} of the network, as well as a Python implementation in TensorFlow \cite{PNPython} or PyTorch \cite{PNTorch} version.\par
 Except for the feature extraction, the implementations of the PointNet network also include additional networks for scene segmentation and object classification based on the extracted feature vector from the PointNet network. Furthermore, all required learning and dataset preparation algorithms are also included.
 
 \section{Color Models}\label{section:colorModels}
 
-There are many different ways to represent a single color on a computer. Except for the well-known RGB representation, there are many different other representations with distinct advantages. Lab [TODO refs] representation is for the work the most interesting because it allows easy color difference computation, using CIE76 [TODO ref] and CIE2000 [TODO ref] that correspond in the best way to the difference told by humans.\par
+There are many different ways to represent a single color on a computer. Except for the well-known RGB representation, there are many different other representations with distinct advantages. Lab \cite{Lab} representation is for the work the most interesting because it allows easy color difference computation, using CIE76 and CIE2000 \cite{CIEs} that correspond in the best way to the difference told by humans.\par
 Similarly, as in an RGB format, the colors are represented using three different components, L, a, and b. The L part stands for lightness and means how light or dark the color is. The a and b components represent the balance between two different colors. The a part describes the balance between green and magenta, and the b part represents the balance between blue and yellow. Even if this color scheme can describe the whole space of colors, the colors visible by human eyes are located in a sphere, displayed in Figure \ref{fig:labscheme}.
 
 %https://www.researchgate.net/figure/CIELab-1976-after-Figure-1-from-SantAnna-et-al-2013-602_fig4_311426707

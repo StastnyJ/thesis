@@ -1,8 +1,8 @@
-\section{Data fusion and preprocessing}
+\section{Data fusion and preprocessing}\label{section:fusion}
 
 This section introduces the process of processing the raw data received from the sensors and creating a final representation of the environment that is further used as an input for the other stages of the process.\par
 In this thesis, we receive colored 2-dimensional images from an HD camera and a raw 3D point cloud from a 3D lidar sensor. The goal is to use these two inputs and generate a colored point cloud for a more accurate environment representation.\par
-In this work, we assume that both sensors are calibrated and that the excentric parameters, namely field of view and transformation matrix between sensor's frames, are already known. If this is not the case, some of the following well-known techniques (TODO ref) can be used for their determination.\par
+In this work, we assume that both sensors are calibrated and that the excentric parameters, namely field of view and transformation matrix between sensor's frames, are already known. If this is not the case, some of the following well-known techniques \cite{Calibration1} \cite{Calibration2} can be used for their determination.\par
 The whole process can be divided into three major parts. In the beginning, the frequencies of the sensors must be synchronized. Then, after the input data are synchronized, the data fusion is performed, and the individual scene representations are merged into one mutual model, containing information from all individual sensors. Finally, the built representation is preprocessed and simplified by removing the unnecessary data, especially the information about the ground. The whole process is visualized in Figure \ref{fig:dataFusionWorkflow} and each step is described in the following subsections.
 
 \begin{figure}[htpb]
@@ -34,7 +34,7 @@ The time difference between the image and point cloud is so low, compared to the
 
 \subsection{Data fusion}
 
-At this point, we assume that all the data are synchronized and working with a pair of images and raw point clouds representing the same scene at the same time. (TODO also assumes the same frame?). The goal is to build a colored 3D point cloud.\par
+At this point, we assume that all the data are synchronized and working with a pair of images and raw point clouds representing the same scene at the same time. The goal is to build a colored 3D point cloud.\par
 The point cloud $PC$ is represented as an unordered set of triples, describing a single point's $x, y, z$ coordinates:
 $$
     PC \subseteq \left\{ (x,y,z) | (x,y,z) \in \mathbb{R}^3\right\}.
@@ -55,7 +55,7 @@ Let $\mathbf{P}$ be the projection matrix that projects 3D world coordinates int
 $$
     \mathbf{x} = \mathbf{P}\mathbf{X},
 $$
-where $\mathbf{X} = \left[x_\text{world},y_\text{world},z_\text{world}\right]^T$ represents a 3D world coordinates vector and $\mathbf{x} = \left[x_\text{image}, y_\text{image}\right]^T$ represents a 2D image plane coordinates vector. This matrix can be found using the camera's and lidar's excentric parameters received from the calibration [TODO ref].\par
+where $\mathbf{X} = \left[x_\text{world},y_\text{world},z_\text{world}\right]^T$ represents a 3D world coordinates vector and $\mathbf{x} = \left[x_\text{image}, y_\text{image}\right]^T$ represents a 2D image plane coordinates vector. This matrix can be found using the camera's and lidar's excentric parameters received from the calibration.\par
 If we know the projection matrix $\mathbf{P}$, we can iterate through all the points in the point cloud, project them into the image plane, find the corresponding pixel and bind its color with the examined point. All points outside the camera's field of view shall be ignored and not included in the result.\par
 The algorithm for the fusion of the data received from Lidar and camera is summarized in the Algorithm \ref{alg:fusion}.
 
@@ -97,4 +97,4 @@ Let's assume that all points from the points cloud are represented in the world'
     \end{algorithmic}
 \end{algorithm}
 
-Besides the ground, this method can remove some other objects' bottom parts, like the feet of pedestrians, wheels of wheelchairs, etc., which can lead to a slightly more significant information loss than pure ground removal. However, there exist other, better ground removal techniques, usually based on machine learning, which do not suffer from this issue [TODO refs]. Yet, these techniques typically require more computational resources than the simple filtering approach, and the results are usually not significantly different\footnote{Especially in the indoor environments with static objects like furniture, which are in the main focus of this work}, so we decided to prefer this simple method despite the minor quality drawbacks.
+Besides the ground, this method can remove some other objects' bottom parts, like the feet of pedestrians, wheels of wheelchairs, etc., which can lead to a slightly more significant information loss than pure ground removal. However, there exist other, better ground removal techniques, usually based on machine learning, which do not suffer from this issue \cite{groundRemoval1} \cite{groundRemoval2}. Yet, these techniques typically require more computational resources than the simple filtering approach, and the results are usually not significantly different\footnote{Especially in the indoor environments with static objects like furniture, which are in the main focus of this work}, so we decided to prefer this simple method despite the minor quality drawbacks.
