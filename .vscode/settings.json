@@ -89,6 +89,21 @@
         "language": "latex",
         "scheme": "file",
         "pattern": "chapters/05_Experiments.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/05_Experiments/5.9_Discussion.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "chapters/06_Conclusion.tex"
+    },
+    {
+        "language": "latex",
+        "scheme": "file",
+        "pattern": "pages/abstract.tex"
     }
 ]
 }

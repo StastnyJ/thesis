@@ -32,13 +32,18 @@ There will be suggested several algorithms with different expected advantages an
 
 \section{Work contribution}\label{section:workContribution}
 
-% Problems I have solved - specific with examples eg. I designed NN, I come up with 2 stage approach, etc., all small steps I have done i the project, compact representation of the scene, generate repr. of featers, ...
-% significance of each step described
+First, I came up with a compact scene representation that combines the advantages of both LiDAR and the camera. Then I suggested a practical approach to fuse the data received from the sensors into the chosen representation. This part also contained sensor synchronization and calibration.\par
+Afterward, I designed a compact and suitable scene template that will be stored in the memory. While creating the template, I followed the biological inspiration, namely the model of human spatial memory. I also devised a method to extract the designed template from the fused scene representation effectively. Finally, after preparing the template model, I created an approach to compare two of these templates and thus solved the scene recognition problem.\par
+The suggested algorithm was based on scene decomposition, object detection, and extraction of the significant properties of each object. However, this approach did not consider the objects' exact shape, leading to a considerable increase of false positive evaluations in several environments. To eliminate these false positive evaluations, I came up with a 2 stage approach. This approach was based on the originally designed method. All scenes were evaluated before; however, all positive evaluations were re-evaluated using a neural network in the second stage.\par
+To create a working second stage, I choose suitable network architecture and experimentally found the best network's dimensions. After deciding on the network architecture, I made appropriate training datasets and trained and tested the model.\par
+The suggested approach was dependent on many different parameters. The optimal parameters had to be found to maximize the place recognition performance. So, I came up with an optimization method that finds an optimal parameters vector, maximizing the approach's accuracy. In order to implement this optimization method, I created a set of tools for manual and automatic performance testing and analysis.\par
+After the scene recognition algorithm was finished, I successfully integrated it with RatSLAM and created a robust biologically inspired SLAM system. I made the whole system in ROS to ensure its modularity, reconfigurability, reusability, and easy improvement.\par
+After creating the whole system, I devised several evaluation metrics to test all critical methods' properties. I set up a robust testing simulation in several environments and created reusable testing datasets to ensure the reproducibility of all experiments. Finally, I tested all suggested techniques and the OpenRatSLAM approach, found an appropriate results presentation, and compared all presented methods.
 
 \section{Outline}\label{section:outline}
 
-\textbf{Chapter 2} presents a related work about various scene recognition approaches and biologically inspired SLAM systems \\
-\textbf{Chapter 3} describes all used frameworks and tools used in this work\\
+\textbf{Chapter 2} presents a related work about various scene recognition approaches and biologically inspired SLAM systems.\\
+\textbf{Chapter 3} describes all used frameworks and tools used in this work.\\
 \textbf{Chapter 4} provides a detailed description of all the algorithms and techniques implemented in this thesis. Namely, the complete system overview is provided in the beginning, followed by the solution to the data fusion problem. Afterward, three different place recognition techniques are offered.\\
-\textbf{Chapter 5} TODO\\
-\textbf{Chapter 6} TODO\\
+\textbf{Chapter 5} evaluates the performance of approaches presented in chapter 4 and compares them with the OpenRatSLAM. The beginning of the chapter introduces the test environments and evaluation metrics. The following four sections will discuss the results of the different evaluation metrics. In the penultimate section will be tested the integration of the place recognition approaches with RatSLAM. Finally, the last section summarizes all measured results and discusses all suggested techniques' final performance and advantages or disadvantages.\\
+\textbf{Chapter 6} summarizes the whole work, alerts to possible drawbacks, and suggests future work.\\
