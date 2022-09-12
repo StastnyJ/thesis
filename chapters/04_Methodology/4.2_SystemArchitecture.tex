@@ -1,6 +1,6 @@
-\section{System architecture}\label{section:systemArchitecture}
+\section{System Architecture}\label{section:systemArchitecture}
 
-This section presents an overview of the architecture of the whole system. The system is decomposed into several Nodes. Together with the  RatSLAMRos and simulator, the system uses three custom nodes: Data fusion, LV Builder, and LV matching. Furthermore, the system contains two additional nodes that do not influence the algorithm's run but are used for the performance analyses and other help utilities, helping with the development process. The system architecture is presented in Figure \ref{fig:systemArchitecture}. The visualization and topics used only for visualization purposes are omitted for clarity.
+This section presents an overview of the architecture of the whole system. The system is decomposed into several Nodes. Together with the  RatSLAM ROS and simulator, the system uses three custom nodes: Data fusion, LV Builder, and LV matching. Furthermore, the system contains two additional nodes that do not influence the algorithm's run but are used for the performance analyses and other help utilities, helping with the development process. The system architecture is presented in Figure \ref{fig:systemArchitecture}. The visualization and topics used only for visualization purposes are omitted for clarity.
 
 \begin{figure}[htpb]
     \centering
@@ -27,7 +27,7 @@ This node represents the whole simulation and can be easily replaced with a phys
     \end{tabular}
 \end{table}
 
-\subsection{Data fusion}
+\subsection{Data Fusion}
 
 The goal of this node is to take raw data from the sensors and create a single representation of the environment, combining the advantages of each sensor. This node takes care of the synchronization of the sensors, dealing with different frames of reference and the fusion itself. The data fusion node subscribes to the camera and LiDAR topics published by simulation or a real robot and publishes one topic with the final environment representation. How this node exactly works is described in the section \ref{section:fusion}.
 
@@ -48,7 +48,7 @@ The goal of this node is to take raw data from the sensors and create a single r
 
 \subsection{LV Builder}
 
-This node subscribes single topic published by the Data Fusion node. The main task of this node is to take the environment representation and reformat it into a suitable template that will be stored in a memory and compared with previously visited scenes. This node publishes a topic with the built template and two other topics for visualization and debugging purposes. Different approaches to the exact implementation of this node are described in the sections \ref{section:placeOutline} - \ref{section:2stage}\ref.
+This node subscribes single topic published by the Data Fusion node. The main task of this node is to take the environment representation and reformat it into a suitable template that will be stored in a memory and compared with previously visited scenes. This node publishes a topic with the built template and two other topics for visualization and debugging purposes. Different approaches to the exact implementation of this node are described in the sections \ref{section:placeOutline} - \ref{section:2stage}.
 
 \begin{table}[htpb]
     \caption{Subscribed and published topics by the LV Builder node}\label{tab:lvBuilderTopics}
@@ -81,9 +81,9 @@ This node subscribes to a topic published by the LV Builder node. The goal of th
     \end{tabular}
 \end{table}
 
-\subsection{Rat SLAM Ros}
+\subsection{Rat SLAM ROS}
 
-This diagram block represents not a single node but a whole package from several nodes. This is an original RatSLAMRos described in section \ref{section:ratSlamRW}, run without almost any changes. The only difference compared to the original package is the number of started nodes. The lv Node is not activated because its job is done by LV Builder and LV Matching node, and the visual odometry Node is replaced by an odometry sensor from the simulator. The package subscribes to the topic with scene ids published by the LV matching node and to the topic with odometry directly from the simulator. The only relevant published topic is the experience map topic, with the final experience map, which is the final result of the whole algorithm.
+This diagram block represents not a single node but a whole package from several nodes. This is an OpenRatSLAM described in section \ref{section:ratSlamRW}, run without almost any changes. The only difference compared to the original package is the number of started nodes. The lv Node is not activated because its job is done by LV Builder and LV Matching node, and the visual odometry Node is replaced by an odometry sensor from the simulator. The package subscribes to the topic with scene ids published by the LV matching node and to the topic with odometry directly from the simulator. The only relevant published topic is the experience map topic, with the final experience map, which is the final result of the whole algorithm.
 
 \begin{table}[htpb]
     \caption{Relevant subscribed and published topics by the RatSLAMRos package}\label{tab:ratslamTopics}
@@ -101,7 +101,7 @@ This diagram block represents not a single node but a whole package from several
 
 \subsection{LV Analyzer}
 
-This node subscribes to the same topics as the Rat SLAM Ros package. This node serves only debugging purposes and does not influence the algorithm. The goal of this node is to evaluate the performance of the algorithm. It receives all the ids of matched and new ids from the LV Matching node and can pair them with the exact position of the robot at the time the scene template was taken because of the information received from the simulator. This node remembers the precise position of each scene newly remembered by the LV Matching node and can calculate the position difference between each match and the original matched scene. Furthermore, it can calculate the distance to the nearest previously visited scene for each newly added template. According to the metrics described in the section \ref{section:Evaluation}, the number of false positive and false negative matches can be calculated, leading to the approach's final accuracy, recall, and precision. These estimated numbers are the final output of this node.
+This node subscribes to the same topics as the Rat SLAM ROS package. This node serves only debugging purposes and does not influence the algorithm. The goal of this node is to evaluate the performance of the algorithm. It receives all the ids of matched scenes and new ids from the LV Matching node and can pair them with the exact position of the robot at the time the scene template was taken because of the information received from the simulator. This node remembers the precise position of each scene newly remembered by the LV Matching node and can calculate the position difference between each match and the original matched scene. Furthermore, it can calculate the distance to the nearest previously visited scene for each newly added template. According to the metrics described in the section \ref{section:Evaluation}, the number of false positive and false negative matches can be calculated, leading to the approach's final accuracy, recall, and precision. These estimated numbers are the final output of this node.
 
 
 \begin{table}[htpb]
@@ -118,7 +118,7 @@ This node subscribes to the same topics as the Rat SLAM Ros package. This node s
     \end{tabular}
 \end{table}
 
-\subsection{LV Dataset creator}\label{section:lvdatasetCreator}
+\subsection{LV Dataset Creator}\label{section:lvdatasetCreator}
 
 This node works in principle similarly to the LV Analyzer node. The goal of this node is to pair the templates with their exact positions received from the simulator. Unlike the LV Analyzer node, this node receives and pairs the whole template from the LV Builder node instead of only the scene id from the LV Matching node. The set of pairs of templates and their exact positions is the output of this node, which helps build final datasets for automatic parameter tuning, see section \ref{section:parameterTuning}, or neural networks training, see section \ref{section:nnTraining}.
 

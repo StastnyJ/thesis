@@ -1,17 +1,17 @@
-\section{Data fusion and preprocessing}\label{section:fusion}
+\section{Data Fusion and Preprocessing}\label{section:fusion}
 
 This section introduces the process of processing the raw data received from the sensors and creating a final representation of the environment that is further used as an input for the other stages of the process.\par
-In this thesis, we receive colored 2-dimensional images from an HD camera and a raw 3D point cloud from a 3D lidar sensor. The goal is to use these two inputs and generate a colored point cloud for a more accurate environment representation.\par
+In this thesis, we receive colored 2-dimensional images from an HD camera and a raw 3D point cloud from a 3D LiDAR sensor. The goal is to use these two inputs and generate a colored point cloud for a more accurate environment representation.\par
 In this work, we assume that both sensors are calibrated and that the excentric parameters, namely field of view and transformation matrix between sensor's frames, are already known. If this is not the case, some of the following well-known techniques \cite{Calibration1} \cite{Calibration2} can be used for their determination.\par
 The whole process can be divided into three major parts. In the beginning, the frequencies of the sensors must be synchronized. Then, after the input data are synchronized, the data fusion is performed, and the individual scene representations are merged into one mutual model, containing information from all individual sensors. Finally, the built representation is preprocessed and simplified by removing the unnecessary data, especially the information about the ground. The whole process is visualized in Figure \ref{fig:dataFusionWorkflow} and each step is described in the following subsections.
 
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.8\textwidth]{dataFusionWorkflow.pdf}
-    \caption{Caption} \label{fig:dataFusionWorkflow}
+    \caption{Data fusion workflow} \label{fig:dataFusionWorkflow}
 \end{figure}
 
-Figure \ref{fig:dataFusionExample} illustrates example inputs received from the sensors (a) and (b), generated output after the data fusion (c), and final generated output after the ground removal (d).
+Figure \ref{fig:dataFusionExample} illustrates example inputs received from the sensors, generated output after the data fusion, and final generated output after the ground removal.
 
 \begin{figure}[!tbp]
     \centering
@@ -26,13 +26,13 @@ Figure \ref{fig:dataFusionExample} illustrates example inputs received from the 
     \label{fig:dataFusionExample}
 \end{figure}
 
-\subsection{Sensors synchronization}
+\subsection{Sensors Synchronization}
 
 This section solves the problem that the sensors deliver data at different times with different frequencies. The goal of the synchronization is to receive unsynchronized data from both sensors and return synchronized pairs of images and point clouds that will be used for further fusion.\par
-The technique used in this thesis is based on the assumption that the camera frequency is significantly larger than the frequency of the 3D-lidar\footnote{In the experiments, we used a camera that has 15 times higher frequency than the 3D-lidar.}. Based on this fact, the system can just record all the images received from the camera. All point clouds received from the 3D-lidar are afterward paired with the last received image.\par
-The time difference between the image and point cloud is so low, compared to the frequency of the lidar, that it can be neglected, and we can assume that the image and the point cloud were taken simultaneously.
+The technique used in this thesis is based on the assumption that the camera frequency is significantly larger than the frequency of the 3D-LiDAR\footnote{In the experiments, we used a camera that has 15 times higher frequency than the 3D-LiDAR.}. Based on this fact, the system can just record all the images received from the camera. All point clouds received from the 3D-LiDAR are afterward paired with the last received image.\par
+The time difference between the image and point cloud is so low, compared to the frequency of the LiDAR, that it can be neglected, and we can assume that the image and the point cloud were taken simultaneously.
 
-\subsection{Data fusion}
+\subsection{Data Fusion}
 
 At this point, we assume that all the data are synchronized and working with a pair of images and raw point clouds representing the same scene at the same time. The goal is to build a colored 3D point cloud.\par
 The point cloud $PC$ is represented as an unordered set of triples, describing a single point's $x, y, z$ coordinates:
@@ -55,12 +55,12 @@ Let $\mathbf{P}$ be the projection matrix that projects 3D world coordinates int
 $$
     \mathbf{x} = \mathbf{P}\mathbf{X},
 $$
-where $\mathbf{X} = \left[x_\text{world},y_\text{world},z_\text{world}\right]^T$ represents a 3D world coordinates vector and $\mathbf{x} = \left[x_\text{image}, y_\text{image}\right]^T$ represents a 2D image plane coordinates vector. This matrix can be found using the camera's and lidar's excentric parameters received from the calibration.\par
+where $\mathbf{X} = \left[x_\text{world},y_\text{world},z_\text{world}\right]^T$ represents a 3D world coordinates vector and $\mathbf{x} = \left[x_\text{image}, y_\text{image}\right]^T$ represents a 2D image plane coordinates vector. This matrix can be found using the camera's and LiDAR's excentric parameters received from the calibration. \cite{pinholeCitation}\par
 If we know the projection matrix $\mathbf{P}$, we can iterate through all the points in the point cloud, project them into the image plane, find the corresponding pixel and bind its color with the examined point. All points outside the camera's field of view shall be ignored and not included in the result.\par
-The algorithm for the fusion of the data received from Lidar and camera is summarized in the Algorithm \ref{alg:fusion}.
+The algorithm for the fusion of the data received from LiDAR and camera is summarized in the Algorithm \ref{alg:fusion}.
 
 \begin{algorithm}
-    \caption{Lidar and camera data fustion}\label{alg:fusion}
+    \caption{LiDAR and camera data fustion}\label{alg:fusion}
     \begin{algorithmic}
         \Require Point cloud $PC$, camera image $img$
         \Ensure Colored point cloud $CPC$
@@ -77,10 +77,10 @@ The algorithm for the fusion of the data received from Lidar and camera is summa
     \end{algorithmic}
 \end{algorithm}
 
-\subsection{Ground removal}
+\subsection{Ground Removal}
 
-Ground removal is a widely used technique, applied by many algorithms working with 3D clouds. Even if the information about the ground, particularly about the ground color, might help distinguish between two different scenes, the points representing the floor are usually in the same position for every scene and therefore carry a relatively small information value. Removing these points can significantly reduce the input size, with minimal loss of the information value, which can positively influence the algorithm's performance. Furthermore, the ground points may connect two completely separate objects and therefore have a negative influence on the scene segmentation or object detection algorithms.\par
-Let's assume that all points from the points cloud are represented in the world's frame of reference and that $y$ ax is orthogonal to the ground. Then, it is evident that there exists a threshold $y_{th}$, such that all points representing a ground have $y$ coordinate lower or equal to the $y_{th}$ and all other points will have $y$ coordinate larger than $y_{th}$. So, if the threshold $y_{th}$ is known\footnote{This threshold can be very easily determined experimentally.}, the ground point can be removed simply by filtering the points by their $y$ coordinate. The ground removal process is summarized in the Algorithm \ref{alg:groundRemoval}.
+Ground removal is a widely used technique, applied by many algorithms working with 3D point clouds. Even if the information about the ground, particularly about the ground color, might help distinguish between two different scenes, the points representing the floor are usually in the same position for every scene and therefore carry a relatively small information value. Removing these points can significantly reduce the input size, with minimal loss of the information value, which can positively influence the algorithm's performance. Furthermore, the ground points may connect two completely separate objects and therefore have a negative influence on the scene segmentation or object detection algorithms.\par
+Let's assume that all points from the point cloud are represented in the world's frame of reference and that $y$ axis is orthogonal to the ground. Then, it is evident that there exists a threshold $y_{th}$, such that all points representing a ground have $y$ coordinate lower or equal to the $y_{th}$ and all other points will have $y$ coordinate larger than $y_{th}$. So, if the threshold $y_{th}$ is known\footnote{This threshold can be very easily determined experimentally.}, the ground point can be removed simply by filtering the points by their $y$ coordinate. The ground removal process is summarized in the Algorithm \ref{alg:groundRemoval}.
 
 \begin{algorithm}
     \caption{Ground removal}\label{alg:groundRemoval}

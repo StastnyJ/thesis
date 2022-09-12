@@ -4,11 +4,11 @@ The result of a place recognition for a single scene can be either positive or n
 Let $n$ be number of scenes in the simulation and $S = \left(s_1, s_2, \dots, s_n\right)$ an ordered set of scenes that are gradually passed as an input to the algorithm. Let $P = \left(p_1, p_2, \dots, p_n\right)$ be an ordered set of the exact robot locations\footnote{$x$ and $y$ coordinates} and $O = \left(o_1, o_2, \dots, o_n\right)$ be an ordered set of exact robot orientations, on which the robot was in a time, when the appropriate scene was taken. Finally, let $R = \left(r_1, r_2, \dots, r_n \right)$ be an ordered set of scene ids, generated as an output of the place recognition algorithm.\par
 Now, the result $r_i$ will be considered positive if
 $$
-    \exists j < i : r_j = r_i
-$$, and negative if
+    \exists j < i : r_j = r_i,
+$$ and negative if
 $$
-    \forall j < i : r_j \neq r_i
-$$. The positive result is considered a false positive if the first scene with the same id is too far from the current scene in terms of location and orientation. The negative result is considered false negative if a previously saved scene is very close to the current scene in terms of location and orientation.\par
+    \forall j < i : r_j \neq r_i.
+$$ The positive result is considered a false positive if the first scene with the same id is too far from the current scene in terms of location and orientation. The negative result is considered false negative if a previously saved scene is very close to the current scene in terms of location and orientation.\par
 Formally, let
 $$
     first\_ind(x) = \begin{cases}

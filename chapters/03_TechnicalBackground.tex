@@ -1,6 +1,6 @@
 \chapter{Technical Background}\label{chapter:technicalBackground}
 
-This chapter provides an overview of most of the techniques, frameworks, and libraries related to the thesis, including the Robot Operating System ROS, used Lidar sensors, Gazebo, Turtlebo3 models, RViz, OpenCV, Pytorch, PointNet, and different models used for the representation of colors and calculating of their differences.
+This chapter provides an overview of most of the techniques, frameworks, and libraries related to the thesis, including the Robot Operating System ROS, Gazebo, Turtlebo3 models, RViz, OpenCV, Pytorch, PointNet, and different models used for the representation of colors and calculating of their differences.
 
 \section{Robot Operating System}\label{section:ROS}
 
@@ -17,14 +17,14 @@ Roscore is a service that must be executed before running any Node of the ROS sy
 
 Ros Nodes are a crucial concept of the whole system. Single Node represents a standalone service that can process data received from other ROS Nodes, sensors, or users and send them to the other Nodes or directly to the user or system actors. The entire application usually consists of many ROS Nodes that communicate using ROS topics, services, etc.
 
-\subsection*{ROS message}
+\subsection*{ROS Message}
 
 Messages are the most common way of communication between several ROS Nodes. These messages are transmitted between the Nods via ROS topics. The ROS message, typically stored in the .msg file, describes a format that the data transmitted on a particular ROS topic must fulfill and tells the ROS Node how to represent the received data.\par
-According to the convention, most messages start with the Header part, containing the message sequence number, timestamp, and frame id. However, this header is optional and is not present in all commonly used messages.
+According to the convention, most messages start with the Header part, containing the message sequence number, timestamp, and frame id. However, this header is optional and is not present in some commonly used messages.
 
-\subsection*{ROS topic}
+\subsection*{ROS Topic}
 
-ROS topics are named buses, serving for message exchange between the Nodes. One or more Nodes can publish messages or subscribe to each ROS topic and receive all published messages. The publishing and subscribing processes work anonymously, which means that the publisher does not know if the message was read by only one or more or any Node, and receivers do not know which node published the particular message unless it's part of the sent data.\par
+ROS topics are named buses, serving for message exchange between the Nodes. One or more nodes can publish messages or subscribe to each ROS topic and receive all published messages. The publishing and subscribing processes work anonymously, which means that the publisher does not know if the message was read by only one or more or any node, and receivers do not know which node published the particular message unless it's part of the sent data.\par
 Every topic is strongly connected with a particular message type, so every message published on the same topic must have the same format.
 
 \subsection*{Roslaunch}
@@ -47,7 +47,7 @@ Catkin is a collection of CMake macros and Python scripts commonly used for the 
 \section{Gazebo}\label{section:gazebo}
 
 Gazebo is a famous open-source 3D-simulation tool supporting robot simulation in complex 3D environments, including realistic physics, like gravity, friction, collisions, light reflections, etc. These environments can also change over time, which allows adding pedestrians, moving cars, or other non-stationary objects to the simulation.\par
-Furthermore, Gazebo supports various types of sensors, especially HD-Camera, 3D or 2D Lidar, IMU, etc., or several plugins for the robot control. This tool also provides an interface fully compatible with ROS, which makes it a perfect simulation tool for this thesis.
+Furthermore, Gazebo supports various types of sensors, especially HD-Camera, 3D or 2D LiDAR, IMU, etc., or several plugins for the robot control. This tool also provides an interface fully compatible with ROS, which makes it a perfect simulation tool for this thesis.
 
 \section{Turtlebot3}\label{section:turtlebot}
 
@@ -72,12 +72,11 @@ Except for the feature extraction, the implementations of the PointNet network a
 
 \section{Color Models}\label{section:colorModels}
 
-There are many different ways to represent a single color on a computer. Except for the well-known RGB representation, there are many different other representations with distinct advantages. Lab \cite{Lab} representation is for the work the most interesting because it allows easy color difference computation, using CIE76 and CIE2000 \cite{CIEs} that correspond in the best way to the difference told by humans.\par
+There are many different ways to represent a single color on a computer. Except for the well-known RGB representation, there are many different other representations with distinct advantages. Lab \cite{Lab} representation is for the work the most interesting because it allows easy color difference computation, using CIE76 and CIE2000 formulas \cite{CIEs} that correspond in the best way to the difference told by humans.\par
 Similarly, as in an RGB format, the colors are represented using three different components, L, a, and b. The L part stands for lightness and means how light or dark the color is. The a and b components represent the balance between two different colors. The a part describes the balance between green and magenta, and the b part represents the balance between blue and yellow. Even if this color scheme can describe the whole space of colors, the colors visible by human eyes are located in a sphere, displayed in Figure \ref{fig:labscheme}.
 
-%https://www.researchgate.net/figure/CIELab-1976-after-Figure-1-from-SantAnna-et-al-2013-602_fig4_311426707
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.8\textwidth]{Lab.png}
-    \caption{Visualization of an Lab color representation [TODO ref]} \label{fig:labscheme}
+    \caption{Visualization of an Lab color representation \cite{labImage}} \label{fig:labscheme}
 \end{figure}
